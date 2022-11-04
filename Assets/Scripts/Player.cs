@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     //Variável rigidbody
     private Rigidbody2D rig;
 
+    public bool isJumping;
+    public bool doubleJumping;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour
         //Chama o método
         Move();
         Jump();
+
     }
 
     //Método controla a velocidade de movimento
@@ -40,7 +44,46 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            rig.AddForce(new Vector2(0f, JumpForce),  ForceMode2D.Impulse);
+            //Se não estiver pulando, esta no chão
+            if(!isJumping)
+            {
+                rig.AddForce(new Vector2(0f, JumpForce),  ForceMode2D.Impulse);
+                doubleJumping = true;
+                print("Jump");
+                // isJumping = true;
+            }
+            
+            //Se estiver pulando, pronto para o segundo pulo
+            if(doubleJumping)
+            {
+                rig.AddForce(new Vector2(0f, JumpForce * 2.2f),  ForceMode2D.Impulse);
+                doubleJumping = false;
+                print("Double Jump");
+            }
+            
+        }
+    }
+
+    //É chamado quando o personagem tocar em alguma coisa
+     void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 8)
+        {
+            //quando o personagem esta tocando o chão
+            isJumping = false;
+            print("tocou no chão");
+        }
+    }
+
+    //É chamado quando o personagem para de tocar em algo
+     void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 8)
+        {
+            //quando o personagem esta pulando
+            isJumping = true;
+            doubleJumping = true;
+            print("deixou de tocar o chão!");
         }
     }
 }

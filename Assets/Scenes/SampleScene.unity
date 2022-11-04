@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 733685085}
   - component: {fileID: 733685084}
   - component: {fileID: 733685086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bricks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1188,7 +1188,7 @@ GameObject:
   - component: {fileID: 775808867}
   - component: {fileID: 775808866}
   - component: {fileID: 775808868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2418,7 +2418,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  JumpForce: 10
+  JumpForce: 5
+  isJumping: 0
+  doubleJumping: 0
 --- !u!1 &1492983352
 GameObject:
   m_ObjectHideFlags: 0
